@@ -1,12 +1,14 @@
 import express from "express"
 import {requireAuth} from "./middleware/authMiddleware.js"
 import authRouter from "./routes/authRouter.js"
+import userRouter from "./routes/userRouter.js"
 
 const app = express();
 const port = 3000;
 
 app.use(express.json())
-app.use("/api/auth" ,authRouter)
+app.use("/api/auth", authRouter)
+app.use("/api/user", userRouter)
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
