@@ -26,10 +26,20 @@ export const ReviewModel = {
 	},
 
 	findById: async (id) => {
-		return await getMongoDb().collection('reviews').findOne({_id: new ObjectId(id)})
+		try {
+			return await getMongoDb().collection('reviews').findOne({_id: new ObjectId(id)})				
+		} catch(err) {
+			console.error("Error: ", err.status)
+			return null
+		}
 	},
 
 	findByUser: async (userId) => {
-		return await getMongoDb().collection('reviews').find({userId}).toArray()
+		try {
+			return await getMongoDb().collection('reviews').find({userId}).toArray()
+		} catch(err) {
+			console.error("Error: ", err.status)
+			return null
+		}
 	}
 }
