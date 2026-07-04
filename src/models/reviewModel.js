@@ -41,5 +41,14 @@ export const ReviewModel = {
 			console.error("Error: ", err.status)
 			return null
 		}
+	},
+
+	deleteReviewById: async (id) => {
+		try {
+			return await getMongoDb().collection('reviews').deleteOne({_id: new ObjectId(id)})
+		} catch(err) {
+			console.error("Error: ", err.status)
+			return null
+		}
 	}
 }
