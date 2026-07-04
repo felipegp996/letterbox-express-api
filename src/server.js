@@ -1,7 +1,11 @@
 import express from "express"
 import {requireAuth} from "./middleware/authMiddleware.js"
+import { connectMongoDB } from "./config/db.js"
 import authRouter from "./routes/authRouter.js"
 import userRouter from "./routes/userRouter.js"
+import reviewRouter from "./routes/reviewRouter.js"
+import { initReviewIndexes } from './models/reviewModel.js';
+import { initListIndexes } from './models/listModel.js';
 
 const app = express();
 const port = 3000;
@@ -9,6 +13,7 @@ const port = 3000;
 app.use(express.json())
 app.use("/api/auth", authRouter)
 app.use("/api/user", userRouter)
+app.use("/api/reviews", reviewRouter)
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
@@ -23,6 +28,11 @@ app.get('/api/users/profile', requireAuth, (req, res) => {
     user: req.user
   });
 });
+
+await connectMongoDB()
+
+initReviewIndexes()
+initListIndexes()
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import pkg from '@prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
 import pkgPg from 'pg';
+import { MongoClient } from "mongodb"
 
 // 1. Força o carregamento do .env.local direto do sistema de arquivos
 const __filename = fileURLToPath(import.meta.url);
@@ -13,6 +14,9 @@ dotenv.config({ path: path.resolve(__dirname, '../../.env.local') });
 const { PrismaClient } = pkg;
 const { Pool } = pkgPg;
 
+// ==========================================
+// 2. PostgreSQL / Prisma Setup
+// ==========================================
 const getPrismaClient = () => {
   const connectionString = process.env.DATABASE_URL;
 
@@ -35,3 +39,32 @@ const getPrismaClient = () => {
 };
 
 export const prisma = getPrismaClient();
+
+// ==========================================
+// 3. Native MongoDB Setup
+// ==========================================
+const mongoURL = process.env.MONGO_CONNECT
+const mongoClient = new MongoClient(mongoURL)
+let mongoDbInstance = null
+
+export const connectMongoDB = async () => {
+  if(mongoDbInstance) return mongoDbInstance
+
+  try {
+
+    await mongoClient.connect()
+    console.log('🔌 Conectando ao MongoDB com sucesso...');
+    mongoDbInstance = mongoClient.db('letterboxd-clone-api');
+    return mongoDbInstance
+  } catch(err) {
+    console.error('❌ Erro ao conectar no MongoDB:', err);
+    throw err;
+  }
+}
+
+export const getMongoDb = () => {
+  if(!mongoDbInstance) {
+    throw new Error("❌ Erro: Banco de dados MongoDB não inicializado. Chame connectMongoDB() primeiro.");
+  }
+  return mongoDbInstance
+}
