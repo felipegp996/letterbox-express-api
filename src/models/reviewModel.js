@@ -17,7 +17,7 @@ export const ReviewModel = {
 			userId: reviewData.userId,
 			tmdbId: Number(reviewData.tmdbId),
 			rating: parseFloat(reviewData.rating),
-			conent: reviewData.content?.trim() || "",
+			content: reviewData.content?.trim() || "",
 			createdAt: new Date(),
 			updatedAt: new Date()
 		}
@@ -46,6 +46,15 @@ export const ReviewModel = {
 	deleteReviewById: async (id) => {
 		try {
 			return await getMongoDb().collection('reviews').deleteOne({_id: new ObjectId(id)})
+		} catch(err) {
+			console.error("Error: ", err.status)
+			return null
+		}
+	},
+
+	updateReview: async (id, reviewData) => {
+		try {
+			return await getMongoDb().collection('reviews').updateOne(id, reviewData.content)
 		} catch(err) {
 			console.error("Error: ", err.status)
 			return null
