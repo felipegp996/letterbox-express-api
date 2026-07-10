@@ -33,7 +33,7 @@ export const ListModel = {
     );
   },
 
-  removeMovieFromList: async (listId, tmdbId) => {
+  deleteMovieFromList: async (listId, tmdbId) => {
     return await getMongoDb().collection('lists').updateOne(
       { _id: new ObjectId(listId) },
       { 

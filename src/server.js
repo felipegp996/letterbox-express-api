@@ -17,7 +17,7 @@ app.use("/api/auth", authRouter)
 app.use("/api/user", userRouter)
 app.use("/api/reviews", reviewRouter)
 app.use("/api/movies", moviesRouter)
-app.use("/api/list", listRouter)
+app.use("/api/lists", listRouter)
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
