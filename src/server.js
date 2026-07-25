@@ -7,6 +7,7 @@ import userRouter from "./routes/userRouter.js"
 import reviewRouter from "./routes/reviewRouter.js"
 import moviesRouter from "./routes/moviesRouter.js"
 import listRouter from "./routes/listRouter.js"
+import trendingRouter from "./routes/trendingRouter.js"
 import { initReviewIndexes } from './models/reviewModel.js';
 import { initListIndexes } from './models/listModel.js';
 
@@ -25,6 +26,7 @@ app.use("/api/user", userRouter)
 app.use("/api/reviews", reviewRouter)
 app.use("/api/movies", moviesRouter)
 app.use("/api/lists", listRouter)
+app.use("/api/trending", trendingRouter)
 
 app.get('/', (req, res) => {
   res.send('Hello World!');

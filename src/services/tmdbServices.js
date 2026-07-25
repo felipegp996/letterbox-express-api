@@ -48,3 +48,33 @@ export const searchMovies = async (query, page = 1) => {
     throw err;
   }
 };
+
+export const getTrendingMovies = async (period = "week") => {
+  try {
+    const response = await fetch(`${TMDB_API_URL}/trending/movie/${period}?language=en-US`, getOptions())
+
+    if(!response.ok) {
+      throw new Error(`TMDB API Error: ${response.status} ${response.statusText}`);
+    }
+
+    return await response.json()
+  } catch (err) {
+    console.error("❌ Failed to fetch trending movies: ", err.message)
+    throw err
+  }
+} 
+
+export const getTrendingPeople = async (period = "week") => {
+  try {
+    const response = await fetch(`${TMDB_API_URL}/trending/person/${period}?language=en-US`, getOptions())
+
+    if(!response.ok) {
+      throw new Error(`TMDB API Error: ${response.status} ${response.statusText}`);
+    }
+
+    return await response.json()
+  } catch (err) {
+    console.error("❌ Failed to fetch trending perople: ", err.message)
+    throw err
+  }
+}

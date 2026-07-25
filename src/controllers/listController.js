@@ -51,8 +51,8 @@ export const createList = async (req, res) => {
 
 		return res.status(201).json({message: "List created!", listId: result.insertedId})
 	} catch (err) {
-		 console.error("Error!", err)
-    	return res.status(500).json({ error: "Internal server error" });
+		  console.error("Error!", err)
+      return res.status(500).json({ error: "Internal server error" });
 	}
 }
 
