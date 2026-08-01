@@ -17,7 +17,9 @@ export const searchExternalMovies = async (req, res) => {
       title: movie.title,
       posterPath: movie.poster_path,
       releaseYear: movie.release_date ? movie.release_date.split('-')[0] : null,
-      overview: movie.overview
+      overview: movie.overview,
+      voteCount: movie.vote_count,
+      voteAverage: movie.vote_average
     }));
 
     return res.status(200).json({
@@ -45,7 +47,9 @@ export const getMovie = async (req, res) => {
       title: data.title,
       posterPath: data.poster_path,
       releaseYear: data.release_date ? data.release_date.split('-')[0] : null,
-      overview: data.overview
+      overview: data.overview,
+      voteCount: data.vote_count,
+      voteAverage: data.vote_average
     }
 
     return res.status(200).json({

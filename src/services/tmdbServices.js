@@ -37,7 +37,7 @@ export const searchMovies = async (query, page = 1) => {
   try {
     const encodedQuery = encodeURIComponent(query);
     const response = await fetch(
-      `${TMDB_API_URL}/search/movie?query=${encodedQuery}&include_adult=false&language=en-US&page=${page}`,
+      `${TMDB_API_URL}/search/movie?query=${encodedQuery}&language=en-US&page=${page}`,
       getOptions()
     );
 
