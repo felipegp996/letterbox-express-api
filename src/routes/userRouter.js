@@ -4,7 +4,7 @@ import { requireAdmin, requireAuth } from "../middleware/authMiddleware.js"
 
 const router = Router()
 
-router.post("/createUser", requireAuth, requireAdmin, createUser)
+router.post("/createUser", createUser)
 router.delete("/deleteUser", requireAuth, requireAdmin, deleteUser)
 router.post("/updateUser", requireAuth, requireAdmin, updateUser)
 
