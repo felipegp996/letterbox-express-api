@@ -18,7 +18,8 @@ app.use(express.json())
 app.use(cors({
   origin: [
     process.env.VERCEL_FRONT_APP,
-    process.env.VERCLE_FRONT_APP_LOCAL
+    process.env.VERCEL_FRONT_APP_DEPLOY,
+    process.env.VERCLE_FRONT_APP_LOCAL,
   ],
   credentials: true
 }))
