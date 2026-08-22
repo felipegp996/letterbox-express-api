@@ -17,7 +17,8 @@ const port = 3000;
 app.use(express.json())
 app.use(cors({
   origin: [
-    'http://localhost:5173',
+    process.env.VERCEL_FRONT_APP,
+    process.env.VERCLE_FRONT_APP_LOCAL
   ],
   credentials: true
 }))
