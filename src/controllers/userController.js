@@ -51,7 +51,22 @@ export const updateUser = async (req, res) => {
     console.error("❌ Erro detalhado no registro:", error)
     return res.status(500).json({error: "Erro interno no servidor: " + error.message})
   }
+}
 
+export const updateMyUser = async (req, res) => {
+  try {
+    const {id, name, email} = req.body
+
+    const user = await prisma.user.update({
+      where: {id},
+      data: {name: name, email: email}
+    })
+
+    return res.status(201).json({message: "Usuário atualizado com sucesso!", user: user})
+  } catch(error) {
+    console.error("❌ Erro detalhado no registro:", error)
+    return res.status(500).json({error: "Erro interno no servidor: " + error.message})
+  }
 }
 
 export const deleteUser = async (req, res) => {
